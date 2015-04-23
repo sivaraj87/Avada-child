@@ -59,5 +59,39 @@ echo '<p>WordPress is nice!</p>';
 function the_action()
 {
 do_action('the_action_hook');
+do_action('wp_ajax_nopriv_get_thumbnail');
+do_action('wp_ajax_get_thumbnail');
 }
 
+
+/* home made API for your own thumbnails */
+add_action( 'wp_ajax_get_thumbnail', 'ajax_get_thumbnail' );
+add_action( 'wp_ajax_nopriv_get_thumbnail', 'ajax_get_thumbnail' );
+
+function ajax_get_thumbnail() {
+    $post_id = $_GET['post_id'];
+    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'post-thumbnail' );
+
+    echo json_encode($thumb);
+
+    die(); // this is required to return a proper result
+}
+
+/* another source */
+add_action( 'wp_ajax_nopriv_myajax-submit', 'myajax_submit' );
+add_action( 'wp_ajax_myajax-submit', 'myajax_submit' );
+
+function myajax_submit() {
+// get the submitted parameters
+   $postID = $_POST['postID'];
+
+   $response = get_thumbnail_images(); 
+   $response = json_encode($response);
+
+// response output
+   header( "Content-Type: application/json" );
+   echo $response;
+
+// IMPORTANT: don't forget to "exit"
+exit;
+}

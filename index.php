@@ -1,8 +1,71 @@
 <?php get_header(); ?>
 <?php if( is_front_page() && !is_paged() ) : ?>
 <p>Home Page</p>
+<script>
+$.getJSON('http://film.zack.website/wp-json/wp/posts/', function(data) {
+        console.log("posts datset");
+        console.log(data);
+        posts_set = data;
+}); //getJSON              
 
-<div id="content">
+$.getJSON('http://film.zack.website/wp-json/wp/media/', function(data) {
+        console.log("media datset");
+        console.log(data);
+        media_set = data;
+
+        for (var i = 0; i < media_set.length; i++){
+          $('h1').html(media_set[i].guid.rendered);
+        }
+}); //getJSON              
+
+$.getJSON('http://film.zack.website/wp-json/wp/posts/', function(data) {
+    var list = $('#posts');
+    
+    for (var i = 0; i < data.length; i++){
+      var div = $('<div></div>');
+      var title = $('<h1></h1>');
+      title.html(data[i].title.rendered);
+      var content = $('<p>' + data[i].excerpt.rendered + '</p>');
+      
+      list.append(div);
+      div.append(title);
+      div.append(content);
+    }
+}); //getJSON
+
+$.getJSON('http://film.zack.website/wp-json/wp/media/', function(data) {
+    
+    for (var i = 0; i < data.length; i++){
+      var gallery = $('<img></img>');
+      gallery.html(data[i].source_url);
+      
+      console.log(data[i].source_url + "blah");
+      $('.gallery').append(gallery);
+      //$('h1').html('<img src=' + data[i].source_url + '>');
+
+      //div.append(content);
+    }
+}); //getJSON
+
+
+</script>
+<hr />
+<div id="posts">
+    <div class="post">
+      <h1></h1>
+      <div class="gallery"></div>
+      <p><p>
+    </div>
+</div>
+
+
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+static
 illin
     <?php
         $new_query = new WP_Query();
