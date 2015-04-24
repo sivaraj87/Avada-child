@@ -1,307 +1,62 @@
 <?php get_header(); ?>
-<?php if( is_front_page() && !is_paged() ) : ?>
-<p>Home Page</p>
-<script>
-$.getJSON('http://film.zack.website/wp-json/wp/posts/', function(data) {
-        console.log("posts datset");
-        console.log(data);
-        posts_set = data;
-}); //getJSON              
+<div id="main">
+  <div class="page-title">
+    <?php if( is_front_page() && !is_paged() ) : ?>
+  <div class="most-recent-news-title">
+    <span>Most Recent Reviews</span>
+  </div>
+  <?php
+    //primer
+    $new_query = new WP_Query();
+    $new_query->query('post_type=post&showposts=1'.'&paged='.$paged);
+  ?>
+  <div class="most-recent">
+    <div class="col1">
+        <?php while ($new_query->have_posts()) : $new_query->the_post(); ?>
+            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+        <?php 
+          if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+          the_post_thumbnail(); //featured image
+        }?>
+        <?php the_date('m.d.y', '<time class="clearfix timestamp">', '</time>'); ?>
+        <a href="<php the_permalink(); ?>"><?php the_excerpt(); ?></a>
 
-$.getJSON('http://film.zack.website/wp-json/wp/media/', function(data) {
-        console.log("media datset");
-        console.log(data);
-        media_set = data;
-
-        for (var i = 0; i < media_set.length; i++){
-          $('h1').html(media_set[i].guid.rendered);
-        }
-}); //getJSON              
-
-$.getJSON('http://film.zack.website/wp-json/wp/posts/', function(data) {
-    var list = $('#posts');
-    
-    for (var i = 0; i < data.length; i++){
-      var div = $('<div></div>');
-      var title = $('<h1></h1>');
-      title.html(data[i].title.rendered);
-      var content = $('<p>' + data[i].excerpt.rendered + '</p>');
-      
-      list.append(div);
-      div.append(title);
-      div.append(content);
-    }
-}); //getJSON
-
-$.getJSON('http://film.zack.website/wp-json/wp/media/', function(data) {
-    
-    for (var i = 0; i < data.length; i++){
-      var gallery = $('<img></img>');
-      gallery.html(data[i].source_url);
-      
-      console.log(data[i].source_url + "blah");
-      $('.gallery').append(gallery);
-      //$('h1').html('<img src=' + data[i].source_url + '>');
-
-      //div.append(content);
-    }
-}); //getJSON
-
-
-</script>
-<hr />
-<div id="posts">
-    <div class="post">
-      <h1></h1>
-      <div class="gallery"></div>
-      <p><p>
+        <?php endwhile; ?>
+    </div><!-- #content -->
+    <div class="col2">
+      <img src="http://placehold.it/350x250" alt="" />
     </div>
-</div>
-
-
-<hr />
-<hr />
-<hr />
-<hr />
-<hr />
-<hr />
-static
-illin
-    <?php
-        $new_query = new WP_Query();
-        $new_query->query('post_type=post&showposts=1'.'&paged='.$paged);
-    ?>
-
-    <?php while ($new_query->have_posts()) : $new_query->the_post(); ?>
-						<h2<?php if( ! $smof_data['disable_date_rich_snippet_pages'] ) { echo ' class="entry-title"'; } ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-<?php get_template_part('new-slideshow'); ?>
-
-    <?php endwhile; ?>
-    <div id="pagination">
-        <?php next_posts_link('&laquo; Older Entries', $new_query->max_num_pages) ?>
-        <?php previous_posts_link('Newer Entries &raquo;') ?>
-    </div>
-</div><!-- #content -->
-<script>
-$('#pagination a').on('click', function(event){
-event.preventDefault();
-var link = $(this).attr('href'); //Get the href attribute
-$('#content').fadeOut(500, function(){ });//fade out the content area
-$('#content').load(link + ' #content', function() { });
-$('#content').fadeIn(500, function(){ });//fade in the content area
-
-});
-</script>
+  </div> <!--most recent over-->
 <?php else : ?>
 <p>Not Home Page</p>
-
 <?php endif; ?>
-<?php rewind_posts(); ?>
-	<?php
-	$container_class = '';
-	$timeline_icon_class = '';
-	$post_class = '';
-	$content_css = 'width:100%';
-	$sidebar_css = 'display:none';
-	$content_class = '';
-	$sidebar_exists = false;
-	$sidebar_left = '';
-	$double_sidebars = false;
 
-	$sidebar_1 = $smof_data['blog_archive_sidebar'];
-	$sidebar_2 = $smof_data['blog_archive_sidebar_2'];
-	if( $sidebar_1 != 'None' && $sidebar_2 != 'None' ) {
-		$double_sidebars = true;
-	}
+  <div class="rest-of-posts clearfix">
+    <!--second loop-->
+  <?php rewind_posts(); ?>
+  <?php
+    //primer
+    $new_query = new WP_Query();
+    $new_query->query('post_type=post&offset=1');
+  ?>
+  <div class="col1">
+        <?php while ($new_query->have_posts()) : $new_query->the_post(); ?>
+            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+        <?php 
+          if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+          the_post_thumbnail( array(440, 440) );  // Other resolutions
+        }?>
+        <?php the_date('m.d.y', '<time class="clearfix timestamp">', '</time>'); ?>
+        <a href="<php the_permalink(); ?>"><?php the_excerpt(); ?></a>
 
-	if( $sidebar_1 != 'None' ) {
-		$sidebar_exists = true;
-	} else {
-		$sidebar_exists = false;
-	}
+        <?php endwhile; ?>
+    </div>
 
-	if( ! $sidebar_exists ) {
-		$content_css = 'width:100%';
-		$sidebar_css = 'display:none';
-		$content_class= 'full-width';
-		$sidebar_exists = false;
-	} elseif($smof_data['blog_sidebar_position'] == 'Left') {
-		$content_css = 'float:right;';
-		$sidebar_css = 'float:left;';
-		$sidebar_left = 1;
-	} elseif($smof_data['blog_sidebar_position'] == 'Right') {
-		$content_css = 'float:left;';
-		$sidebar_css = 'float:right;';
-		$sidebar_left = 2;
-	}
-
-	if($double_sidebars == true) {
-		$content_css = 'float:left;';
-		$sidebar_css = 'float:left;';
-		$sidebar_2_css = 'float:left;';
-	} else {
-		$sidebar_left = 1;
-	}
-
-	if($smof_data['blog_layout'] == 'Large Alternate') {
-		$post_class = 'large-alternate';
-	} elseif($smof_data['blog_layout'] == 'Medium Alternate') {
-		$post_class = 'medium-alternate';
-	} elseif($smof_data['blog_layout'] == 'Medium') {
-		$post_class = 'medium';		
-	} elseif($smof_data['blog_layout'] == 'Grid') {
-		$post_class = 'grid-post';
-		$container_class = sprintf( 'grid-layout grid-layout-%s isotope', $smof_data['blog_grid_columns'] );
-	} elseif($smof_data['blog_layout'] == 'Timeline') {
-		$post_class = 'timeline-post';
-		$container_class = 'timeline-layout';
-		if( $sidebar_exists ) {
-			$container_class = 'timeline-layout timeline-sidebar-layout';
-			$timeline_icon_class = ' has-sidebar';
-		}
-	}
-	?>
-	<div id="content" class="<?php echo $content_class; ?>" style="<?php echo $content_css; ?>">
-		<?php if($smof_data['blog_layout'] == 'Timeline'): ?>
-		<div class="timeline-icon<?php echo $timeline_icon_class; ?>"><i class="fusionicon-bubbles"></i></div>
-		<?php endif; ?>
-		<div id="posts-container" class="<?php echo $container_class; ?> clearfix">
-<!--loop-->
-			<?php
-			$post_count = 1;
-
-			$prev_post_timestamp = null;
-			$prev_post_month = null;
-			$prev_post_year = null;
-			$first_timeline_loop = false;
-                        $offset = 2;
-
-                        query_posts("showposts=3&offset=$offset");
-
-			while(have_posts()): the_post();
-				$post_timestamp = strtotime($post->post_date);
-				$post_month = date('n', $post_timestamp);
-				$post_year = get_the_date('o');
-				$current_date = get_the_date('o-n');
-			?>
-			<?php if($smof_data['blog_layout'] == 'Timeline'): ?>
-			<?php if($prev_post_month != $post_month || $prev_post_year != $post_year): ?>
-				<div class="timeline-date"><h3 class="timeline-title"><?php echo get_the_date($smof_data['timeline_date_format']); ?></h3></div>
-			<?php endif; ?>
-			<?php endif; ?>
-			<?php $thumb_class = ''; ?>
-			<?php if(get_post_meta(get_the_ID(), 'pyre_video', true) ): ?>
-			<?php $thumb_class = ' has-post-thumbnail'; ?>
-			<?php endif; ?>
-			<div id="post-<?php the_ID(); ?>" <?php post_class($post_class.getClassAlign($post_count) . $thumb_class . ' post clearfix'); ?>>
-				<div class="post-wrapper">
-<div class="column col col-lg-8 col-md-8 col-sm-8">
-						<h2<?php if( ! $smof_data['disable_date_rich_snippet_pages'] ) { echo ' class="entry-title"'; } ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-					<?php if($smof_data['blog_layout'] == 'Medium Alternate'): ?>
-					<?php echo avada_post_date_and_format_box(); ?>
-                                </div>
-					<?php endif; ?>
-					<?php
-					if($smof_data['featured_images']):
-						get_template_part('new-slideshow');
-					endif;
-					?>
-					<div class="post-content-container">
-					<?php if($smof_data['blog_layout'] == 'Timeline'): ?>
-					<div class="timeline-circle"></div>
-					<div class="timeline-arrow"></div>
-					<?php endif; ?>
-						<?php if($smof_data['blog_layout'] != 'Large Alternate' && $smof_data['blog_layout'] != 'Medium Alternate' && $smof_data['blog_layout'] != 'Grid'  && $smof_data['blog_layout'] != 'Timeline'): ?>
-						<?php endif; ?>
-						<?php if($smof_data['blog_layout'] == 'Large Alternate'): ?>
-						<?php echo avada_post_date_and_format_box(); ?>
-						<?php endif; ?>
-						<div class="post-content">
-							<?php if($smof_data['blog_layout'] == 'Large Alternate' || $smof_data['blog_layout'] == 'Medium Alternate' || $smof_data['blog_layout'] == 'Grid' || $smof_data['blog_layout'] == 'Timeline'): ?>
-							<?php 
-							if($smof_data['blog_layout'] == 'Grid' || $smof_data['blog_layout'] == 'Timeline') {
-								echo avada_render_post_metadata( 'grid_timeline' );
-							} else {
-								echo avada_render_post_metadata( 'alternate' );
-							}
-							?>
-							<?php endif; ?>
-							<?php if( ( ! $smof_data['post_meta'] && $smof_data['excerpt_length_blog'] == '0' ) || ( $smof_data['post_meta_author'] && $smof_data['post_meta_date'] && $smof_data['post_meta_cats'] && $smof_data['post_meta_tags'] && $smof_data['post_meta_comments'] && $smof_data['post_meta_read'] && $smof_data['excerpt_length_blog'] == '0' ) ): ?>
-							<?php if( ! $smof_data['post_meta'] ): ?> 
-							<div class="no-content-sep"></div>
-							<?php endif; ?>
-							<?php else: ?>
-							<div class="content-sep"></div>
-							<?php endif; ?>
-							<?php
-							if($smof_data['content_length'] == 'Excerpt') {
-								$stripped_content = tf_content( $smof_data['excerpt_length_blog'], $smof_data['strip_html_excerpt'] );
-								echo $stripped_content;
-							} else {
-								the_content('');
-							}
-							?>
-						</div>
-						<div class="fusion-clearfix"></div>
-						<?php if($smof_data['post_meta']): ?>
-						<div class="meta-info">
-							<?php if($smof_data['blog_layout'] == 'Grid' || $smof_data['blog_layout'] == 'Timeline'): ?>
-							<?php if($smof_data['blog_layout'] != 'Large Alternate' && $smof_data['blog_layout'] != 'Medium Alternate'): ?>
-							<div class="alignleft">
-								<?php if(!$smof_data['post_meta_read']): ?><a href="<?php the_permalink(); ?>" class="read-more"><?php echo __('Read More', 'Avada'); ?></a><?php endif; ?>
-							</div>
-							<?php endif; ?>
-							<div class="alignright">
-								<?php if(!$smof_data['post_meta_comments']): ?><?php comments_popup_link('<i class="fusionicon-bubbles"></i>&nbsp;'.__('0', 'Avada'), '<i class="fusionicon-bubbles"></i>&nbsp;'.__('1', 'Avada'), '<i class="fusionicon-bubbles"></i>&nbsp;'.'%'); ?><?php endif; ?>
-							</div>
-							<?php else: ?>
-							<?php if($smof_data['blog_layout'] != 'Large Alternate' && $smof_data['blog_layout'] != 'Medium Alternate'): ?>
-							<?php echo avada_render_post_metadata( 'standard' ); ?>
-							<?php endif; ?>
-							<div class="alignright">
-								<?php if(!$smof_data['post_meta_read']): ?><a href="<?php the_permalink(); ?>" class="read-more"><?php echo __('Read More', 'Avada'); ?></a><?php endif; ?>
-							</div>
-							<?php endif; ?>
-						</div>
-						<?php endif; ?>
-					</div>
-				</div>
-			</div>
-			<?php
-			$prev_post_timestamp = $post_timestamp;
-			$prev_post_month = $post_month;
-			$prev_post_year = $post_year;
-			$post_count++;
-			endwhile;
-			?>
-<!--/loop-->
-
-		</div>
-		<?php themefusion_pagination($pages = '', $range = 2); ?>
-	</div>
-	<?php if( $sidebar_exists == true ): ?>
-	<?php wp_reset_query(); ?>
-	<div id="sidebar" class="sidebar" style="<?php echo $sidebar_css; ?>">
-		<?php
-		if($sidebar_left == 1) {
-			generated_dynamic_sidebar($sidebar_1);
-		}
-		if($sidebar_left == 2) {
-			generated_dynamic_sidebar_2($sidebar_2);
-		}
-		?>
-	</div>
-	<?php if( $double_sidebars == true ): ?>
-	<div id="sidebar-2" class="sidebar" style="<?php echo $sidebar_2_css; ?>">
-		<?php
-		if($sidebar_left == 1) {
-			generated_dynamic_sidebar_2($sidebar_2);
-		}
-		if($sidebar_left == 2) {
-			generated_dynamic_sidebar($sidebar_1);
-		}
-		?>
-	</div>
-	<?php endif; ?>
-	<?php endif; ?>
+      <div class="col2">
+      stuff
+      </div>
+    <?php themefusion_pagination($pages = '', $range = 2); ?>
+  </div>
+</div>
+</div>
 <?php get_footer(); ?>

@@ -1,11 +1,62 @@
 $color: blue;
 
-body {
-  background-color : $color;
+.clearfix {
+  clear: both;
 }
 
-.flex-active-slide{
-    .image { 
-      width: 640px; 
+body {
+  background-color : $color;
+  #main {
+    h2 {
+      font: 36px/20px 'MuseoSlab500Regular', arial, helvetica, sans-serif;
     }
+    .rest-of-posts {
+      border-top: 1px solid #666;
+      h2 {
+        a {
+            font: 26px/20px 'MuseoSlab500Regular', arial, helvetica, sans-serif;
+          }
+      }
+    }
+  }
+}
+.timestamp {
+  margin: 0;
+  padding: 0;
+  color: #969696;
+  text-transform: uppercase;
+  font: 11px/11px Arial,"Helvetica Neue",Helvetica,sans-serif;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+.most-recent{
+  margin-bottom: 3em;
+    p {
+      font-size: 26px;
+    }
+    img { 
+      height: auto;
+      max-width: 100%;
+    }
+    .aside {
+      img {
+        max-width: none;
+        width: initial;
+      }
+    }
+}
+
+@media screen and (min-width: 480px) {
+  .col1 {
+    max-width: 640px;
+    float: left;
+    margin-right: 320px;
+  }
+  .col2 {
+    float: right;
+    margin-left: -300px;
+    width: 300px;
+  }
 }

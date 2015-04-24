@@ -1,5 +1,43 @@
+.clearfix {
+  clear: both; }
+
 body {
   background-color: blue; }
+  body #main h2 {
+    font: 36px/20px 'MuseoSlab500Regular', arial, helvetica, sans-serif; }
+  body #main .rest-of-posts {
+    border-top: 1px solid #666; }
+    body #main .rest-of-posts h2 a {
+      font: 26px/20px 'MuseoSlab500Regular', arial, helvetica, sans-serif; }
 
-.flex-active-slide .image {
-  width: 640px; }
+.timestamp {
+  margin: 0;
+  padding: 0;
+  color: #969696;
+  text-transform: uppercase;
+  font: 11px/11px Arial,"Helvetica Neue",Helvetica,sans-serif;
+  width: 100%;
+  display: inline-block;
+  text-align: center; }
+
+.most-recent {
+  margin-bottom: 3em; }
+  .most-recent p {
+    font-size: 26px; }
+  .most-recent img {
+    height: auto;
+    max-width: 100%; }
+  .most-recent .aside img {
+    max-width: none;
+    width: initial; }
+
+@media screen and (min-width: 480px) {
+  .col1 {
+    max-width: 640px;
+    float: left;
+    margin-right: 320px; }
+
+  .col2 {
+    float: right;
+    margin-left: -300px;
+    width: 300px; } }
