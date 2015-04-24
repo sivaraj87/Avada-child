@@ -10,6 +10,7 @@ add_action('wp_enqueue_scripts', 'avada_child_scripts');
 
 function enque_bitchin_stuff(){
 //array for dependancy management
+  wp_enqueue_script( 'jquery' );
   wp_enqueue_script( 'underscore' );
   wp_enqueue_script( 'backbone', array('underscore') );
   wp_enqueue_script( 'custom',get_stylesheet_directory_uri() . '/js/custom.js', array('backbone') );

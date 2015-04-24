@@ -24,6 +24,9 @@
         <?php endwhile; ?>
     </div><!-- #content -->
     <div class="col2">
+      <div class="most-recent-news-title">
+        <span>Advertisement</span>
+      </div>
       <img src="http://placehold.it/350x250" alt="" />
     </div>
   </div> <!--most recent over-->
@@ -39,22 +42,63 @@
     $new_query = new WP_Query();
     $new_query->query('post_type=post&offset=1');
   ?>
-  <div class="col1">
-        <?php while ($new_query->have_posts()) : $new_query->the_post(); ?>
-            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-        <?php 
-          if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
-          the_post_thumbnail( array(440, 440) );  // Other resolutions
-        }?>
-        <?php the_date('m.d.y', '<time class="clearfix timestamp">', '</time>'); ?>
-        <a href="<php the_permalink(); ?>"><?php the_excerpt(); ?></a>
+    <div class="col1">
+      <?php while ($new_query->have_posts()) : $new_query->the_post(); ?>
+          <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+      <?php 
+        if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+        the_post_thumbnail( array(440, 440) );  // Other resolutions
+      }?>
+      <?php the_date('m.d.y', '<time class="clearfix timestamp">', '</time>'); ?>
+      <a href="<php the_permalink(); ?>"><?php the_excerpt(); ?></a>
 
-        <?php endwhile; ?>
+      <?php endwhile; ?>
     </div>
 
-      <div class="col2">
-      stuff
+    <div class="col2">
+      <div class="most-recent-news-title">
+        <span>Home Entertainment</span>
       </div>
+      <?php rewind_posts(); ?>
+      <?php
+        //primer
+        $args = [
+          'category_name' => 'home-entertainment',
+          'showposts' => '3'
+        ];
+        $new_query = new WP_Query( $args );
+      ?>
+      <?php while ($new_query->have_posts()) : $new_query->the_post(); ?>
+        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+      <?php 
+        if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+        the_post_thumbnail( array(440, 440) );  // Other resolutions
+      }?>
+      <?php the_date('m.d.y', '<time class="clearfix timestamp">', '</time>'); ?>
+      <?php endwhile; ?>
+      <div class="most-recent-news-title">
+        <span>Advertisement</span>
+      </div>
+      <img src="http://placehold.it/350x250" alt="" />
+      <?php rewind_posts(); ?>
+      <?php
+        //primer
+        $args = [
+          'category_name' => 'home-entertainment',
+          'showposts' => '3',
+          'offset' => '3'
+        ];
+        $new_query = new WP_Query( $args );
+      ?>
+      <?php while ($new_query->have_posts()) : $new_query->the_post(); ?>
+        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+      <?php 
+        if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+        the_post_thumbnail( array(440, 440) );  // Other resolutions
+      }?>
+      <?php the_date('m.d.y', '<time class="clearfix timestamp">', '</time>'); ?>
+      <?php endwhile; ?>
+    </div>
     <?php themefusion_pagination($pages = '', $range = 2); ?>
   </div>
 </div>
