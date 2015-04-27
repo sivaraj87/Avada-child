@@ -19,7 +19,7 @@
           the_post_thumbnail(); //featured image
         }?>
         <?php the_date('m.d.y', '<time class="clearfix timestamp">', '</time>'); ?>
-        <a href="<php the_permalink(); ?>"><?php the_excerpt(); ?></a>
+        <p class="post-excerpt"><a href="<php the_permalink(); ?>"><?php echo(get_the_excerpt()); ?></a></p>
 
         <?php endwhile; ?>
     </div><!-- #content -->
@@ -27,7 +27,6 @@
       <div class="most-recent-news-title">
         <span>Advertisement</span>
       </div>
-      <img src="http://placehold.it/350x250" alt="" />
     </div>
   </div> <!--most recent over-->
 <?php else : ?>
@@ -57,7 +56,10 @@
 
     <div class="col2">
       <div class="most-recent-news-title">
-        <span>Home Entertainment</span>
+<header class="ent">
+    <div>Home Entertainment</div>
+  </header>
+        <span></span>
       </div>
       <?php rewind_posts(); ?>
       <?php
@@ -80,6 +82,9 @@
         <span>Advertisement</span>
       </div>
       <img src="http://placehold.it/350x250" alt="" />
+<header class="rec">
+    <div>Recommended</div>
+  </header>
       <?php rewind_posts(); ?>
       <?php
         //primer

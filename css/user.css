@@ -1,35 +1,64 @@
+/*colors*/
+/*fonts*/
 .clearfix {
   clear: both; }
 
+header {
+  background: #1d75cf;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase; }
+  header.ent {
+    margin-bottom: 20px; }
+  header.rec {
+    margin-top: 20px; }
+
 body {
-  background-color: blue; }
-  body #main h2 {
-    font: 36px/20px 'MuseoSlab500Regular', arial, helvetica, sans-serif; }
+  line-height: 1.5em;
+  background-color: #1d75cf;
+  font-family: "Droid Serif", "Georgia", Cambria, Times New Roman, Times, serif !important; }
+  body #main .most-recent {
+    margin-bottom: 3em; }
+    body #main .most-recent p {
+      font-size: 26px;
+      letter-spacing: 1px; }
+    body #main .most-recent img {
+      height: auto;
+      max-width: 100%; }
+    body #main .most-recent .col1 {
+      text-align: center; }
+      body #main .most-recent .col1 h2 {
+        font-size: 38px;
+        letter-spacing: -1px;
+        line-height: 41px;
+        font-style: italic;
+        text-rendering: optimizelegibility;
+        font-weight: 700;
+        font-family: "Droid Serif", "Georgia", Cambria, Times New Roman, Times, serif !important; }
+      body #main .most-recent .col1 .post-excerpt {
+        color: #646464;
+        font-size: 15px;
+        line-height: 22.5px; }
+    body #main .most-recent .aside img {
+      max-width: none;
+      width: initial; }
   body #main .rest-of-posts {
-    border-top: 1px solid #666; }
+    border-top: 1px solid #666;
+    padding-top: 1em; }
     body #main .rest-of-posts h2 a {
-      font: 26px/20px 'MuseoSlab500Regular', arial, helvetica, sans-serif; }
+      font-size: 26px; }
 
 .timestamp {
   margin: 0;
   padding: 0;
   color: #969696;
   text-transform: uppercase;
-  font: 11px/11px Arial,"Helvetica Neue",Helvetica,sans-serif;
+  font: 11px/11px;
   width: 100%;
   display: inline-block;
   text-align: center; }
-
-.most-recent {
-  margin-bottom: 3em; }
-  .most-recent p {
-    font-size: 26px; }
-  .most-recent img {
-    height: auto;
-    max-width: 100%; }
-  .most-recent .aside img {
-    max-width: none;
-    width: initial; }
 
 @media screen and (min-width: 480px) {
   .col1 {
@@ -41,3 +70,11 @@ body {
     float: right;
     margin-left: -300px;
     width: 300px; } }
+/*this theme*/
+/*max width*/
+#header-sticky .avada-row, #header .avada-row, #main .avada-row, .footer-area .avada-row, #slidingbar-area .avada-row, #footer .avada-row, .page-title, .header-social .avada-row, #small-nav .avada-row, .tfs-slider .slide-content-container .slide-content {
+  max-width: 1000px !important; }
+
+/*search box*/
+.main-nav-search-form {
+  display: inline-block !important; }

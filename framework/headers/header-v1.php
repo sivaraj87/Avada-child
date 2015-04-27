@@ -2,6 +2,8 @@
 <div class="header-v1">
 	<header id="header">
 		<div class="avada-row" style="padding-top:<?php echo $smof_data['margin_header_top']; ?>;padding-bottom:<?php echo $smof_data['margin_header_bottom']; ?>;" data-padding-top="<?php echo $smof_data['margin_header_top']; ?>" data-padding-bottom="<?php echo $smof_data['margin_header_bottom']; ?>">
+
+<?php get_template_part( 'advert/home-970x90'); ?>
 			<div class="xlogo" data-margin-right="<?php echo $smof_data['margin_logo_right']; ?>" data-margin-left="<?php echo $smof_data['margin_logo_left']; ?>" data-margin-top="<?php echo $smof_data['margin_logo_top']; ?>" data-margin-bottom="<?php echo $smof_data['margin_logo_bottom']; ?>" style="margin-right:<?php echo $smof_data['margin_logo_right']; ?>;margin-top:<?php echo $smof_data['margin_logo_top']; ?>;margin-left:<?php echo $smof_data['margin_logo_left']; ?>;margin-bottom:<?php echo $smof_data['margin_logo_bottom']; ?>;">
 				<a href="<?php echo home_url(); ?>">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo.jpg" alt="<?php bloginfo('name'); ?>" class="normal_logo" />
@@ -14,6 +16,9 @@
 					<img src="<?php echo $smof_data["logo_retina"]; ?>" alt="<?php bloginfo('name'); ?>" style="width:<?php echo $smof_data["retina_logo_width"].$pixels; ?>;max-height:<?php echo $smof_data["retina_logo_height"].$pixels; ?>; height: auto !important" class="retina_logo" />
 					<?php endif; ?>
 				</a>
+
+<?php get_template_part( 'widgets/social_links'); ?>
+<?php get_template_part( 'gcs'); ?>
 			</div>
 			<?php if($smof_data['ubermenu']): ?>
 			<nav id="nav-uber" class="clearfix">

@@ -1,20 +1,73 @@
-$color: blue;
+/*colors*/
+$white: #ffffff;
+$blue: rgb(29, 117, 207);
+$gray: #646464;
+
+/*fonts*/
+$serif: "Droid Serif","Georgia",Cambria,Times New Roman,Times,serif;
 
 .clearfix {
   clear: both;
 }
-
+header{
+  background: $blue;
+  color: $white;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  &.ent {
+    margin-bottom: 20px;
+  }
+  &.rec {
+    margin-top: 20px;
+  }
+}
 body {
-  background-color : $color;
+  line-height: 1.5em;
+  background-color : $blue;
+  font-family: $serif !important;
   #main {
-    h2 {
-      font: 36px/20px 'MuseoSlab500Regular', arial, helvetica, sans-serif;
+    .most-recent{
+      margin-bottom: 3em;
+        p {
+          font-size: 26px;
+          letter-spacing: 1px;
+        }
+        img { 
+          height: auto;
+          max-width: 100%;
+        }
+        .col1 {
+          text-align: center;
+        h2 {
+          font-size: 38px;
+          letter-spacing: -1px;
+          line-height: 41px;
+          font-style: italic;
+          text-rendering: optimizelegibility;
+          font-weight: 700;
+          font-family: $serif !important;
+        }
+        .post-excerpt {
+          color: $gray;
+          font-size: 15px;
+          line-height: 22.5px;
+        }
+        }
+        .aside {
+          img {
+            max-width: none;
+            width: initial;
+          }
+        }
     }
     .rest-of-posts {
       border-top: 1px solid #666;
+      padding-top: 1em;
       h2 {
         a {
-            font: 26px/20px 'MuseoSlab500Regular', arial, helvetica, sans-serif;
+            font-size: 26px;
           }
       }
     }
@@ -25,28 +78,12 @@ body {
   padding: 0;
   color: #969696;
   text-transform: uppercase;
-  font: 11px/11px Arial,"Helvetica Neue",Helvetica,sans-serif;
+  font: 11px/11px; 
   width: 100%;
   display: inline-block;
   text-align: center;
 }
 
-.most-recent{
-  margin-bottom: 3em;
-    p {
-      font-size: 26px;
-    }
-    img { 
-      height: auto;
-      max-width: 100%;
-    }
-    .aside {
-      img {
-        max-width: none;
-        width: initial;
-      }
-    }
-}
 
 @media screen and (min-width: 480px) {
   .col1 {
@@ -60,3 +97,13 @@ body {
     width: 300px;
   }
 }
+
+/*this theme*/
+
+/*max width*/
+#header-sticky .avada-row, #header .avada-row, #main .avada-row, .footer-area .avada-row, #slidingbar-area .avada-row, #footer .avada-row, .page-title, .header-social .avada-row, #small-nav .avada-row, .tfs-slider .slide-content-container .slide-content { max-width: 1000px !important; }
+/*search box*/
+.main-nav-search-form {
+  display: inline-block !important; 
+}
+
