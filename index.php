@@ -2,17 +2,17 @@
 
 <div id="main">
     <div class="page-title">
-            <div class="most-recent-news-title">
-                <span>Most Recent Reviews</span>
-            </div>
-
+        <div class="most-recent-news-title">
+            <span>Most Recent Reviews</span>
+        </div>
+        <?php if (is_front_page() && !is_paged()) : ?>
             <div class="most-recent">
                 <div class="col1">
                     <?php
                     //loop1
-                    $my_query = new WP_Query( 'posts_per_page=1' );
-                    while ( $my_query->have_posts() ) : $my_query->the_post();
-                     $do_not_duplicate = $post->ID; ?>
+                    $my_query = new WP_Query('posts_per_page=1');
+                    while ($my_query->have_posts()) : $my_query->the_post();
+                        $do_not_duplicate = $post->ID; ?>
                         <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                         <?php
                         if (has_post_thumbnail()) { // check if the post has a Post Thumbnail assigned to it.
@@ -27,15 +27,25 @@
                 <div class="col2">
                     <div class="most-recent-news-title">
                         <span>Advertisement</span>
-                        <?php get_template_part( 'advert/home-350x250'); ?>
+                        <?php get_template_part('advert/home-350x250'); ?>
                     </div>
                 </div>
             </div> <!--most recent over-->
+        <?php else : ?>
+            <?php
+            //loop1
+            $my_query = new WP_Query('posts_per_page=1');
+            while ($my_query->have_posts()) : $my_query->the_post();
+                $do_not_duplicate = $post->ID;
+            //don't do nothin this is just to pass the do_not_duplicate variable
+            endwhile; ?>
+
+            <p>Not Home Page</p><?php endif; ?>
         <div class="rest-of-posts clearfix">
             <div class="col1">
 
-            <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
-            if ( $post->ID == $do_not_duplicate ) continue; ?>
+                <?php if (have_posts()) : while (have_posts()) : the_post();
+                    if ($post->ID == $do_not_duplicate) continue; ?>
                     <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                     <?php
                     if (has_post_thumbnail()) { // check if the post has a Post Thumbnail assigned to it.
@@ -74,7 +84,7 @@
                 <div class="most-recent-news-title">
                     <span>Advertisement</span>
                 </div>
-                <?php get_template_part( 'advert/home-350x250'); ?>
+                <?php get_template_part('advert/home-350x250'); ?>
                 <header class="rec">
                     <div>Recommended</div>
                 </header>
