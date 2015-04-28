@@ -2,18 +2,17 @@
 
 <div id="main">
     <div class="page-title">
-        <?php if (is_front_page() && !is_paged()) : ?>
             <div class="most-recent-news-title">
                 <span>Most Recent Reviews</span>
             </div>
-            <?php
-            //primer
-            $new_query = new WP_Query();
-            $new_query->query('post_type=post&showposts=1' . '&paged=' . $paged);
-            ?>
+
             <div class="most-recent">
                 <div class="col1">
-                    <?php while ($new_query->have_posts()) : $new_query->the_post(); ?>
+                    <?php
+                    //loop1
+                    $my_query = new WP_Query( 'posts_per_page=1' );
+                    while ( $my_query->have_posts() ) : $my_query->the_post();
+                     $do_not_duplicate = $post->ID; ?>
                         <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                         <?php
                         if (has_post_thumbnail()) { // check if the post has a Post Thumbnail assigned to it.
@@ -22,7 +21,6 @@
                         <?php the_date('m.d.y', '<time class="clearfix timestamp">', '</time>'); ?>
                         <p class="post-excerpt"><a href="<php the_permalink(); ?>"><?php echo(get_the_excerpt()); ?></a>
                         </p>
-
                     <?php endwhile; ?>
                 </div>
                 <!-- #content -->
@@ -33,20 +31,11 @@
                     </div>
                 </div>
             </div> <!--most recent over-->
-        <?php else : ?>
-            <p>Not Home Page</p>
-        <?php endif; ?>
-
         <div class="rest-of-posts clearfix">
-            <!--second loop-->
-            <?php rewind_posts(); ?>
-            <?php
-            //primer
-            $new_query = new WP_Query();
-            $new_query->query('post_type=post&offset=1');
-            ?>
             <div class="col1">
-                <?php while ($new_query->have_posts()) : $new_query->the_post(); ?>
+
+            <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
+            if ( $post->ID == $do_not_duplicate ) continue; ?>
                     <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                     <?php
                     if (has_post_thumbnail()) { // check if the post has a Post Thumbnail assigned to it.
@@ -55,7 +44,7 @@
                     <?php the_date('m.d.y', '<time class="clearfix timestamp">', '</time>'); ?>
                     <a href="<php the_permalink(); ?>"><?php the_excerpt(); ?></a>
 
-                <?php endwhile; ?>
+                <?php endwhile; endif; ?>
             </div>
 
             <div class="col2">
@@ -67,7 +56,7 @@
                 </div>
                 <?php rewind_posts(); ?>
                 <?php
-                //primer
+                //loop3
                 $args = [
                     'category_name' => 'home-entertainment',
                     'showposts' => '3'
@@ -91,7 +80,7 @@
                 </header>
                 <?php rewind_posts(); ?>
                 <?php
-                //primer
+                //loop4
                 $args = [
                     'category_name' => 'home-entertainment',
                     'showposts' => '3',
