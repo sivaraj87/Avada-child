@@ -22,6 +22,9 @@ header{
   &.rec {
     margin-top: 20px;
   }
+
+  .fusion-social-networks { margin-top: 31px; }
+
 }
 body {
   line-height: 1.5em;
@@ -106,4 +109,20 @@ body {
 .main-nav-search-form {
   display: inline-block !important; 
 }
+/*this theme*/
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+  border-color: inherit;
+  background-color: inherit;
+  background-image: inherit;
+}
+.cse .gsc-search-button input.gsc-search-button-v2, input.gsc-search-button-v2 {
+  width: initial !important;
+  height: initial !important;
+}
+.gsib_a, .gsib_b {
+  padding: 0 !important;
+}
 
+.header-wrapper .header-social .avada-row, .header-wrapper #header .avada-row, .footer-area > .avada-row, #footer > .avada-row, #header-sticky .avada-row {
+  margin-left: 7px !important;
+}

@@ -1,4 +1,4 @@
-<div class="col2" style="border: 1px solid red">
+<div class="col2 gcs">
 <script>
   (function() {
     var cx = '010574487159197570805:olqzcmxt5cq';
